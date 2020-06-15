@@ -18,7 +18,21 @@ const Game = {
     frames: 0,
     beePosY: undefined,
     lilPanda: {},
-
+    bigPanda: {
+        img: document.getElementById("spritePanda"),
+        sx: 0,
+        sy: 0,
+        width: 350,
+        height: 276,
+    },
+    key: {
+        up: 38,
+        right: 37,
+        left: 39,
+        down: 40,
+        space: 32,
+        enter: 13
+    },
     init(id) {
         this.canvasDom = document.getElementById(id)
         this.ctx = this.canvasDom.getContext('2d')
@@ -40,6 +54,8 @@ const Game = {
     },
     start() {
         this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
+        //this.setEventListener()
+        this.drawBigPanda()
         setInterval(() => {
             this.frames++
             this.clearScreen()
@@ -47,7 +63,10 @@ const Game = {
             this.frames % 100 === 0 ? this.randomY() : null
             this.delBee()
             this.drawLiana()
-            this.drawPanda()
+            this.drawBigPanda()
+            //this.drawPanda()
+
+
 
             this.lilPanda.drawLilPanda()
             this.lilPanda.moveLilPanda()
@@ -72,14 +91,28 @@ const Game = {
     delBee() {
         this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 700 - 70)
     },
-
-    drawPanda() {
-        this.ctx.drawImage(this.pandaImg, this.canvasSize.w - 700, 200, this.canvasSize.w / 4 + 50, this.canvasSize.h / 2)
+    drawBigPanda() {
+        console.log('charini')
+        this.ctx.drawImage(this.bigPanda.img, this.bigPanda.sx, this.bigPanda.sy, this.bigPanda.with, this.bigPanda.height, this.canvasSize.w - 700, 200, this.canvasSize.w / 4 + 50, this.canvasSize.h / 2);
     },
+    // drawPanda() {
+    //     this.ctx.drawImage(this.pandaImg, this.canvasSize.w - 700, 200, this.canvasSize.w / 4 + 50, this.canvasSize.h / 2)
+    // },
     drawLiana() {
         this.ctx.drawImage(this.lianaImg, this.canvasSize.w - 225, 0, this.canvasSize.w / 14, this.canvasSize.h / 2)
     },
+    // setEventListener() {
+    //     document.addEventListener(“”, e => {
+    //         switch (e.keyCode) {
+    //             case this.key.up[]:
+    //                 …
+    //                 if () {
+    //                     this.panda.move(‘top’)
+    //                     this.panda.animate([0, 3], [0, 1, 2, 3])
+    //                 }
+    //                 break;
 
+    // }
 
 
 }

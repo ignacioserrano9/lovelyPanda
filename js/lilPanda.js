@@ -10,15 +10,9 @@ class LilPanda {
         this.lilPandaimg = document.getElementById("imgLilPanda")
     }
     drawLilPanda() {
-
         this.ctx.drawImage(this.lilPandaimg, this.posX, this.posY, this.lilPandaWidth, this.lilPandaHeight)
-
     }
     moveLilPanda() {
-
-        // this.posY < 259 ? this.posY += this.velY : null
-        this.posY < (this.canvasSize.h / 2-this.lilPandaHeight/2) ? this.posY += this.velY : null
-
-
+          this.posY < (this.canvasSize.h / 2-this.lilPandaHeight/2) ? this.posY += this.velY : null
     }
 }
