@@ -11,10 +11,13 @@ const Game = {
         h: undefined
     },
     pandaImg: document.getElementById("imgPanda"),
+
     backgroundImg: document.getElementById("imgBackground"),
+    lianaImg: document.getElementById("imgLiana"),
     bees: [],
     frames: 0,
-
+    beePosY: undefined,
+    lilPanda: {},
 
     init(id) {
         this.canvasDom = document.getElementById(id)
@@ -40,20 +43,43 @@ const Game = {
             this.frames++
             this.clearScreen()
             this.drawBackground()
+            this.frames % 100 === 0 ? this.randomY() : null
             this.delBee()
-            this.ctx.drawImage(this.pandaImg, this.canvasSize.w - 600, 200, this.canvasSize.w / 4 + 50, this.canvasSize.h / 2)
-            this.frames % 500 === 0 ? this.bees.push(new Bee(this.ctx, this.canvasSize)) : null
+            this.drawLiana()
+            this.drawPanda()
+            this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
+            this.lilPanda.drawLilPanda()
+          //  this.lilPanda.moveLilPanda()
+            this.frames % 100 === 0 ? this.lilPanda.moveLilPanda() : null,
+                this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.canvasSize)) : null
             this.bees.forEach(elm => {
-                elm.randomY()
                 elm.drawBee()
                 elm.moveBee()
-                
+
             })
-        }, 10)
+        }, 1000 / 60)
 
     },
-    
+    randomY() {
+        if ((Math.floor(Math.random() * 3) - 1) === 0) {
+            return this.beePosY = 200
+        } else if ((Math.floor(Math.random() * 3) - 1) === 1) {
+            return this.beePosY = 350
+        } else {
+            return this.beePosY = 500
+        }
+    },
     delBee() {
-        console.log(this.bees)
-        this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 600-70)
-}}
+        this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 700 - 70)
+    },
+
+    drawPanda() {
+        this.ctx.drawImage(this.pandaImg, this.canvasSize.w - 700, 200, this.canvasSize.w / 4 + 50, this.canvasSize.h / 2)
+    },
+    drawLiana() {
+        this.ctx.drawImage(this.lianaImg, this.canvasSize.w - 225, 0, this.canvasSize.w / 14, this.canvasSize.h / 2)
+    },
+
+
+
+}
