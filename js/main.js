@@ -39,6 +39,7 @@ const Game = {
         this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
     },
     start() {
+        this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
         setInterval(() => {
             this.frames++
             this.clearScreen()
@@ -47,11 +48,10 @@ const Game = {
             this.delBee()
             this.drawLiana()
             this.drawPanda()
-            this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
+            
             this.lilPanda.drawLilPanda()
-          //  this.lilPanda.moveLilPanda()
-            this.frames % 100 === 0 ? this.lilPanda.moveLilPanda() : null,
-                this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.canvasSize)) : null
+            this.lilPanda.moveLilPanda()
+                            this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.canvasSize)) : null
             this.bees.forEach(elm => {
                 elm.drawBee()
                 elm.moveBee()

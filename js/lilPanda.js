@@ -4,7 +4,7 @@ class LilPanda {
         this.canvasSize = canvasSize
         this.posX = posX
         this.posY = 1
-        this.velY = 2
+        this.velY = 0.5
         this.lilPandaWidth = canvasSize.w/14
         this.lilPandaHeight = canvasSize.h/5
         this.lilPandaimg = document.getElementById("imgLilPanda")
