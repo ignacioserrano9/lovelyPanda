@@ -48,10 +48,10 @@ const Game = {
             this.delBee()
             this.drawLiana()
             this.drawPanda()
-            
+
             this.lilPanda.drawLilPanda()
             this.lilPanda.moveLilPanda()
-                            this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.canvasSize)) : null
+            this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.canvasSize)) : null
             this.bees.forEach(elm => {
                 elm.drawBee()
                 elm.moveBee()

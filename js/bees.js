@@ -4,7 +4,7 @@ class Bee {
         this.posX = 0
         this.posY = posY
         this.velX = 3
-        this.velY = 2
+        this.velY = 1
         this.beeWidth = 70
         this.beeHeight = 70
         this.gravity = .4
@@ -15,10 +15,6 @@ class Bee {
 
 
 
-
-
-
-
     drawBee() {
 
         this.ctx.drawImage(this.beeImg, this.posX, this.posY, this.beeWidth, this.beeHeight)
@@ -26,44 +22,12 @@ class Bee {
 
 
     moveBee() {
-
         this.posX += this.velX
         this.posY += this.velY
-
-        this.posX > 200 ? this.velY *= -1 : null
-        // this.posX > 400 ? this.velY *= -1 : null
-        // this.posX > 600 ? this.velY *= -1 : null
-        // this.posX > 800 ? this.velY *= -1 : null
-
-        
-        // console.log(this.posX,this.posY)
-        // if (this.posX === 200) {
-        //     this.velX = 0
-        //     this.posY += this.velY
-        //      console.log('entro')
-        //     if (this.posY === 500) {
-        //     this.velY = 0
-        //     this.posY += this.velY
-        //      console.log('entro2')
-        
-        // //     this.posY > 300 ? this.velY *= -1 : null
-        // //     this.posY < 50 ? this.velY *= -1 : null
-        // // }
-        // // else if (this.posY === 300) {
-        // //     this.posX += this.velX
-        // //     this.posY += this.velY
-        // //     this.posY > 400 ? this.velY *= -1 : null
-        // //     this.posY < 200 ? this.velY *= -1 : null
-
-        // // }
-
-        // // else  {
-        // //     this.posX += this.velX
-        // //     this.posY += this.velY
-        // //     this.posY > 500 ? this.velY *= -1 : null
-        // //     this.posY < 350 ? this.velY *= -1 : null
-
-        // }
+        this.posX >= 200 ? this.velY = -1 : null
+        this.posX >= 400 ? this.velY = 1 : null
+        this.posX >= 600 ? this.velY = -1 : null
+        this.posX >= 800 ? this.velY = 1 : null
 
     }
 
