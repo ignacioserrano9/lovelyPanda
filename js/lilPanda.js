@@ -7,14 +7,28 @@ class LilPanda {
         this.velY = 0.5
         this.lilPandaWidth = canvasSize.w / 14
         this.lilPandaHeight = canvasSize.h / 5
-        this.lilPandaimg = document.getElementById("imgLilPanda")
+        
+        this.lilPandaimgAlive = document.getElementById("imgLilPanda")
+        this.deadlilPandaimg = document.getElementById("imgLilPandaDead")
+
+        this.lilPandaimg = this.lilPandaimgAlive
+
     }
     drawLilPanda() {
         this.ctx.drawImage(this.lilPandaimg, this.posX, this.posY, this.lilPandaWidth, this.lilPandaHeight)
     }
     moveLilPanda() {
-          this.posY < (this.canvasSize.h / 2-this.lilPandaHeight/2) ? this.posY += this.velY : null
+
+        if (this.posY < (this.canvasSize.h / 2 - this.lilPandaHeight / 2)) {
+            this.posY += this.velY 
+        } else {
+            this.lilPandaimg = this.deadlilPandaimg
+            this.posY = 700
+
+        }
+           
     }
+
 
    
 }

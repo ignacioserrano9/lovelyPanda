@@ -59,6 +59,7 @@ const Game = {
             this.bigPanda.drawBigPanda()
             this.lilPanda.drawLilPanda()
             this.lilPanda.moveLilPanda()
+            // this.lilPandaDead()
             this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.beeName, this.canvasSize)) : null
             this.bees.forEach(elm => {
 
@@ -89,7 +90,7 @@ const Game = {
     },
     delBee() {
 
-        console.log(this.lives)
+        // console.log(this.lives)
         this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 800)
     },
 
@@ -141,14 +142,22 @@ const Game = {
 
     killBees() {
         this.bees.forEach(elm => {
-
-            if (elm.beeName = 'topBee' && elm.posX === this.canvasSize.w - 900 && this.bigPanda.pandaImg !== this.bigPanda.leftUpPandaImg) {
-                return this.lives - 1
+            
+            if (elm.beeName = 'topBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftUpPandaImg) {
+                console.log(this.lives)
+                return this.lives -= 1
+            }
+            if (elm.beeName = 'midBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftMidPandaImg) {
+                console.log(this.lives)
+                return this.lives -= 1
+            }
+            if (elm.beeName = 'bottomBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg) {
+                console.log(this.lives)
+                return this.lives -= 1
             }
         })
-
-    }
-    // if (this.beeName = 'topBee' && this.bee.posX === this.canvasSize.w - 700 && this.bigPanda.pandaImg === this.bigPanda.leftUpPandaImg) {
-    //     return this.lives -1
-
+        
+    },
+       
+    // lilPandaDead() {this.lilPanda.lilPandaimg = this.deadlilPandaimg ? this.lives -=2 : null}
 }
