@@ -12,8 +12,7 @@ class BigPanda {
         this.rightMidPandaImg = document.getElementById('rightMidPanda')
         this.rightUpPandaImg = document.getElementById('rightUpPanda')
         this.pandaImg = this.leftMidPandaImg
-        // this.pandaMoves = ['brazo D abajo', 'brazo D medio', 'brazo D alto', 'brazo I abajo', 'brazo I medio'],
-        // this.currentPosition = 'brazo D abajo'
+        
 
     }
     drawBigPanda() {
@@ -21,46 +20,6 @@ class BigPanda {
         this.ctx.drawImage(this.pandaImg, this.posX, this.posY, this.bPWeigth, this.bPHeigth)
     }
 
-    armMoves() {
-
-        switch (this.pandaImg) {
-            case this.leftMidPandaImg:
-                document.onkeydown = e => {
-                    e.keyCode === 38 ? this.pandaImg = this.leftUpPandaImg : null
-                    e.keyCode === 40 ? this.pandaImg = this.leftDownPandaImg : null
-                    e.keyCode === 39 ? this.pandaImg = this.rightMidPandaImg : null
-                }
-                
-                break
-            case this.leftUpPandaImg:
-                document.onkeydown = e => {
-
-                    e.keyCode === 40 ? this.pandaImg = this.leftMidPandaImg : null
-                    e.keyCode === 39 ? this.pandaImg = this.rightMidPandaImg : null
-                }
-                break
-            case this.leftDownPandaImg:
-                document.onkeydown = e => {
-
-                    e.keyCode === 38 ? this.pandaImg = this.leftMidPandaImg : null
-                    e.keyCode === 39 ? this.pandaImg = this.rightMidPandaImg : null
-                }
-                break
-            case this.rightMidPandaImg:
-                document.onkeydown = e => {
-
-                    e.keyCode === 38 ? this.pandaImg = this.rightUpPandaImg : null
-                    e.keyCode === 37 ? this.pandaImg = this.leftMidPandaImg : null
-                }
-                break
-                case this.rightUpPandaImg :
-                document.onkeydown = e => {
-
-                    e.keyCode === 40 ? this.pandaImg = this.rightMidPandaImg: null
-                    e.keyCode === 37 ? this.pandaImg = this.leftMidPandaImg : null
-                }
-                break
-        }
-    }
+    
 }
 

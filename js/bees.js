@@ -1,5 +1,5 @@
 class Bee {
-    constructor(ctx, posY, canvasSize) {
+    constructor(ctx, posY, beeName, canvasSize) {
         this.ctx = ctx
         this.posX = 0
         this.posY = posY
@@ -10,7 +10,7 @@ class Bee {
         this.gravity = .4
         this.beeImg = document.getElementById('imgBee')
         this.canvasSize = canvasSize
-
+        this.beeName = beeName
     }
 
 
@@ -31,5 +31,13 @@ class Bee {
 
     }
 
+    killBees() {
 
+        if (this.beeName = 'topBee' /* && this.posX === this.canvasSize.w - 900 && Game.bigPanda.pandaImg !== Game.bigPanda.leftUpPandaImg*/) {
+           console.log('entraaaa')
+            return Game.lives -1
+
+        }
+
+    }
 }
