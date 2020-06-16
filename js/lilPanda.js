@@ -15,4 +15,6 @@ class LilPanda {
     moveLilPanda() {
           this.posY < (this.canvasSize.h / 2-this.lilPandaHeight/2) ? this.posY += this.velY : null
     }
+
+   
 }
