@@ -6,23 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lovely Panda</title>
     <style>
-        * {
-            padding: 0;
-            margin: 0
+        body {
+        padding: 0;
+        text-align: center;
+        font-family: 'H', 'Trebuchet MS', Helvetica;
+        background-color: #F0FFF0;
+        }
+
+        .howToPlay {
+        float: left;
+        width: 15%;
+
+        }
+
+        div {
+        display: block
+        }
+
+        h1 {
+        margin-top: 100px;
+        size: 80px;
+        color: #006400;
+        font-weight: bold;
+        font-style: oblique;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
 
         #myCanvas {
-            border: 1px solid black;
+        border: 2px solid black;
         }
 
         img {
-            display: none;
+        display: none;
+        }
+
+        p {
+        display: flex;
+        padding: 10px 0;
+        font-size: 1.3em;
+        color: #228B22;
+        font-weight: bold;
+        }
+
+
+        body button {
+        margin-top: 80px;
+        font-size: 30px;
+        background-color: #228B22;
+        color: #fff;
+        padding: 20px 40px;
+        border: 0;
+        box-shadow: 0;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-weight: bold;
         }
     </style>
 </head>
 
 
 <body>
+
+    <div class="howToPlay">
+        <h1>Lovely Panda</h1>
+        <button id="start-button">Let's play!!!</button>
+        <p>Oh no!!! The bees are coming to attack us!!!</p>
+        <p>You have stop the bees and prevent the little Panda from falling of the liana.</p>
+        <p>Use the up, down, left and right arrows to control the Big Panda's arms.</p>
+
+    </div>
     <!-- <img id="spritePanda" src="./images/pandaSpritesheet.png">> -->
     <img id="leftDownPanda" src="./images/leftDownPanda.png">
     <img id="leftMidPanda" src="./images/leftMidPanda.png">
@@ -35,7 +87,9 @@
     <img id="imgBee" src="./images/bee.png">
     <img id="imgPanda" src="./images/bigPanda.png">
     <img id="imgBackground" src="./images/selva.png">
-    <canvas id="myCanvas"></canvas>
+    <div class="screen">
+        <canvas id="myCanvas"></canvas>
+    </div>
 
     <script src="./js/bigPanda.js"></script>
     <script src="./js/lilPanda.js"></script>

@@ -20,8 +20,8 @@ const Game = {
     beeName: '',
     lilPanda: {},
     bigPanda: {},
-    score: 5000,
-    lives: 150,
+    score: 0,
+    lives: 3,
 
     init(id) {
         this.canvasDom = document.getElementById(id)
@@ -34,8 +34,8 @@ const Game = {
         this.ctx.drawImage(this.backgroundImg, 0, 0, this.canvasSize.w, this.canvasSize.h)
     },
     setDimensions() {
-        this.canvasSize.w = 1600 //window.innerWidth
-        this.canvasSize.h = 900 //window.innerHeight
+        this.canvasSize.w = window.innerWidth*.8
+        this.canvasSize.h = window.innerHeight
         this.canvasDom.setAttribute('width', this.canvasSize.w)
         this.canvasDom.setAttribute('height', this.canvasSize.h)
     },
@@ -143,16 +143,29 @@ const Game = {
     killBees() {
         this.bees.forEach(elm => {
             
-            if (elm.beeName = 'topBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftUpPandaImg) {
-                console.log(this.lives)
+            if (elm.beeName === 'topBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg === this.bigPanda.leftUpPandaImg) {
+
+                return this.score += 1
+            }
+            if (elm.beeName === 'midBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg === this.bigPanda.leftMidPandaImg) {
+
+                return this.score += 1
+            }
+            if (elm.beeName === 'bottomBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg === this.bigPanda.leftDownPandaImg) {
+
+                return this.score += 1
+            }
+
+            if (elm.beeName === 'topBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftUpPandaImg) {
+
                 return this.lives -= 1
             }
-            if (elm.beeName = 'midBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftMidPandaImg) {
-                console.log(this.lives)
+            if (elm.beeName === 'midBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftMidPandaImg) {
+
                 return this.lives -= 1
             }
-            if (elm.beeName = 'bottomBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg) {
-                console.log(this.lives)
+            if (elm.beeName === 'bottomBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg) {
+
                 return this.lives -= 1
             }
         })
