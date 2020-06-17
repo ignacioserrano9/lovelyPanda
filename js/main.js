@@ -47,34 +47,41 @@ const Game = {
         this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
     },
     start() {
+        
         this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
         this.bigPanda = new BigPanda(this.ctx, this.canvasSize)
-//meter draws en metodo singular
+       
         this.interval = setInterval(() => {
-            this.frames++
+            
             this.clearScreen()
-            this.drawBackground()
-            this.drawScore()
+            this.allDrawing()
+            this.frames++
             this.frames % 100 === 0 ? this.randomY() : null
             this.delBee()
-            this.drawLiana()
             this.armMoves()
             this.killBees()
             this.deadLilPanda()
-            this.bigPanda.drawBigPanda()
-            this.lilPanda.drawLilPanda()
             this.lilPanda.moveLilPanda()
             this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.beeName, this.canvasSize)) : null
-           
+            
             this.bees.forEach(elm => {
                 elm.drawBee()
                 elm.moveBee()
             })
+            
             this.gameover()
-            this.winGame() 
+            this.winGame()
         }, 1000 / 60)
 
     },
+    allDrawing() {
+        this.drawBackground()
+        this.drawScore()
+        this.drawLiana()
+        this.bigPanda.drawBigPanda()
+        this.lilPanda.drawLilPanda()
+    },
+
     deadLilPanda() {
         this.lilPanda.deadState ? this.lives = 0 : null
 
@@ -93,8 +100,8 @@ const Game = {
             this.ctx.fillStyle = "black"
             this.ctx.fillText(`GAME OVER`, 300, 330)
             this.ctx.textBaseLine = 'middle'
-            this.lives=3
-            this.score=0
+            this.lives = 3
+            this.score = 0
         }
 
 
@@ -114,8 +121,8 @@ const Game = {
             this.ctx.fillText(`YOU WON!!!!!`, 310, 330)
             this.ctx.textBaseLine = 'middle'
 
-            this.lives=3
-            this.score=0
+            this.lives = 3
+            this.score = 0
 
         }
     },
@@ -129,24 +136,22 @@ const Game = {
         this.ctx.fillStyle = "green"
         this.ctx.fillText(`LIVES ${this.lives}`, 1000, 70)
     },
-//ternarias
+
     randomY() {
-        if ((Math.floor(Math.random() * 3) - 1) === 0) {
-            return this.beePosY = 350, this.beeName = 'topBee'
-        } else if ((Math.floor(Math.random() * 3) - 1) === 1) {
-            return this.beePosY = 450, this.beeName = 'midBee'
-        } else {
-            return this.beePosY = 600, this.beeName = 'bottomBee'
-        }
+
+        (Math.floor(Math.random() * 3) - 1) === 0 ? (this.beePosY = 350, this.beeName = 'topBee') : null;
+        (Math.floor(Math.random() * 3) - 1) === 1 ? (this.beePosY = 450, this.beeName = 'midBee') : null;
+        (Math.floor(Math.random() * 3) - 1) === 2 ? (this.beePosY = 600, this.beeName = 'bottomBee') : null
+
     },
 
     delBee() {
-
 
         this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 810)
     },
 
     drawLiana() {
+        
         this.ctx.drawImage(this.lianaImg, this.canvasSize.w - 225, 0, this.canvasSize.w / 14, this.canvasSize.h / 2)
     },
 
@@ -197,31 +202,15 @@ const Game = {
 
         this.bees.forEach(elm => {
 
-            if (elm.beeName === 'topBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftUpPandaImg) {
+            elm.beeName === 'topBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftUpPandaImg ? this.score += 100 : null
+            elm.beeName === 'midBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftMidPandaImg ? this.score += 100 : null
+            elm.beeName === 'bottomBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftDownPandaImg ? this.score += 100 : null
 
-                return this.score += 100
-            }
-            if (elm.beeName === 'midBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftMidPandaImg) {
+            elm.beeName === 'topBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftUpPandaImg ? this.lives -= 1 : null
+            elm.beeName === 'midBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftMidPandaImg ? this.lives -= 1 : null
+            elm.beeName === 'bottomBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg ? this.lives -= 1 : null
 
-                return this.score += 100
-            }
-            if (elm.beeName === 'bottomBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftDownPandaImg) {
 
-                return this.score += 100
-            }
-
-            if (elm.beeName === 'topBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftUpPandaImg) {
-
-                return this.lives -= 1
-            }
-            if (elm.beeName === 'midBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftMidPandaImg) {
-
-                return this.lives -= 1
-            }
-            if (elm.beeName === 'bottomBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg) {
-
-                return this.lives -= 1
-            }
         })
 
     }

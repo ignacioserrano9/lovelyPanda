@@ -24,7 +24,6 @@ class LilPanda {
             this.lilPandaimg = this.deadlilPandaimg
             this.lilPandaHeight = this.canvasSize.h / 6
             this.posY = 600
-            this.lives -= 1 * 1000 / 60
             this.deadState = true
         }
 

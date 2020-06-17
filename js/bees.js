@@ -16,7 +16,7 @@ class Bee {
 
 
     drawBee() {
-        // console.log(this.posX)
+        
         this.ctx.drawImage(this.beeImg, this.posX, this.posY, this.beeWidth, this.beeHeight)
     }
 
