@@ -20,7 +20,9 @@ const Game = {
     beeName: '',
     lilPanda: {},
     bigPanda: {},
+    intScore: 0,
     score: 0,
+
     lives: 3,
 
     init(id) {
@@ -34,7 +36,7 @@ const Game = {
         this.ctx.drawImage(this.backgroundImg, 0, 0, this.canvasSize.w, this.canvasSize.h)
     },
     setDimensions() {
-        this.canvasSize.w = window.innerWidth*.8
+        this.canvasSize.w = window.innerWidth * .8
         this.canvasSize.h = window.innerHeight
         this.canvasDom.setAttribute('width', this.canvasSize.w)
         this.canvasDom.setAttribute('height', this.canvasSize.h)
@@ -73,11 +75,11 @@ const Game = {
     drawScore() {
         this.ctx.font = "30px Arial"
         this.ctx.fillStyle = "green"
-        this.ctx.fillText("SCORE: " + this.score, 700, 70)
+        this.ctx.fillText(`SCORE ${this.score}`, 700, 70)
 
         this.ctx.font = "30px Arial"
         this.ctx.fillStyle = "green"
-        this.ctx.fillText("LIVES: " + this.lives, 1000, 70)
+        this.ctx.fillText(`LIVES ${this.lives}`, 1000, 70)
     },
     randomY() {
         if ((Math.floor(Math.random() * 3) - 1) === 0) {
@@ -91,7 +93,7 @@ const Game = {
     delBee() {
 
         // console.log(this.lives)
-        this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 800)
+        this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 810)
     },
 
     drawLiana() {
@@ -141,36 +143,45 @@ const Game = {
     },
 
     killBees() {
+
+//  console.log(this.canvasSize.w-850)
+
         this.bees.forEach(elm => {
-            
-            if (elm.beeName === 'topBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg === this.bigPanda.leftUpPandaImg) {
 
-                return this.score += 1
+            if (elm.beeName === 'topBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftUpPandaImg) {
+
+                return this.score += 100
             }
-            if (elm.beeName === 'midBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg === this.bigPanda.leftMidPandaImg) {
+            if (elm.beeName === 'midBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftMidPandaImg) {
 
-                return this.score += 1
+                return this.score += 100
             }
-            if (elm.beeName === 'bottomBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg === this.bigPanda.leftDownPandaImg) {
+            if (elm.beeName === 'bottomBee' && elm.posX === 600 && this.bigPanda.pandaImg === this.bigPanda.leftDownPandaImg) {
 
-                return this.score += 1
+                return this.score += 100
             }
 
-            if (elm.beeName === 'topBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftUpPandaImg) {
+            if (elm.beeName === 'topBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftUpPandaImg) {
 
                 return this.lives -= 1
             }
-            if (elm.beeName === 'midBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftMidPandaImg) {
+            if (elm.beeName === 'midBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftMidPandaImg) {
 
                 return this.lives -= 1
             }
-            if (elm.beeName === 'bottomBee' && elm.posX >= this.canvasSize.w - 850 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg) {
+            if (elm.beeName === 'bottomBee' && elm.posX ===  600 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg) {
 
                 return this.lives -= 1
             }
         })
-        
-    },
-       
-    // lilPandaDead() {this.lilPanda.lilPandaimg = this.deadlilPandaimg ? this.lives -=2 : null}
+
+    //     this.finalScore()
+
+    // },
+    // finalScore() {
+    //     if (Math.floor(this.intScore) % 17) {
+    //        return this.score += 1
+    //     }
+    }
+    // // lilPandaDead() {this.lilPanda.lilPandaimg = this.deadlilPandaimg ? this.lives -=2 : null}
 }

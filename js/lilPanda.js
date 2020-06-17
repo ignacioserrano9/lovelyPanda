@@ -24,6 +24,7 @@ class LilPanda {
         } else {
             this.lilPandaimg = this.deadlilPandaimg
             this.posY = 700
+            this.lives -= 1*1000/60
 
         }
            
