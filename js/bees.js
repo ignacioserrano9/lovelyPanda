@@ -16,7 +16,7 @@ class Bee {
 
 
     drawBee() {
-
+        // console.log(this.posX)
         this.ctx.drawImage(this.beeImg, this.posX, this.posY, this.beeWidth, this.beeHeight)
     }
 
@@ -31,13 +31,13 @@ class Bee {
 
     }
 
-    killBees() {
+    // killBees() {
 
-        if (this.beeName = 'topBee' /* && this.posX === this.canvasSize.w - 900 && Game.bigPanda.pandaImg !== Game.bigPanda.leftUpPandaImg*/) {
-           console.log('entraaaa')
-            return Game.lives -1
+    //     if (this.beeName = 'topBee' /* && this.posX === this.canvasSize.w - 900 && Game.bigPanda.pandaImg !== Game.bigPanda.leftUpPandaImg*/) {
+    //        console.log('entraaaa')
+    //         return Game.lives -1
 
-        }
+    //     }
 
-    }
+    // }
 }
