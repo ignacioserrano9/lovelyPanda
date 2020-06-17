@@ -31,13 +31,5 @@ class Bee {
 
     }
 
-    // killBees() {
-
-    //     if (this.beeName = 'topBee' /* && this.posX === this.canvasSize.w - 900 && Game.bigPanda.pandaImg !== Game.bigPanda.leftUpPandaImg*/) {
-    //        console.log('entraaaa')
-    //         return Game.lives -1
-
-    //     }
-
-    // }
+   
 }

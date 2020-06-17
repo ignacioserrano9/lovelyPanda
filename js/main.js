@@ -11,7 +11,6 @@ const Game = {
         h: undefined
     },
     pandaImg: document.getElementById("imgPanda"),
-
     backgroundImg: document.getElementById("imgBackground"),
     lianaImg: document.getElementById("imgLiana"),
     bees: [],
@@ -20,16 +19,19 @@ const Game = {
     beeName: '',
     lilPanda: {},
     bigPanda: {},
-    intScore: 0,
     score: 0,
-
     lives: 3,
+    interval: undefined,
+
+
+
 
     init(id) {
         this.canvasDom = document.getElementById(id)
         this.ctx = this.canvasDom.getContext('2d')
         this.setDimensions()
-        this.start()
+        this.drawBackground()
+
 
     },
     drawBackground() {
@@ -37,7 +39,7 @@ const Game = {
     },
     setDimensions() {
         this.canvasSize.w = window.innerWidth * .8
-        this.canvasSize.h = window.innerHeight
+        this.canvasSize.h = 900
         this.canvasDom.setAttribute('width', this.canvasSize.w)
         this.canvasDom.setAttribute('height', this.canvasSize.h)
     },
@@ -47,8 +49,8 @@ const Game = {
     start() {
         this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
         this.bigPanda = new BigPanda(this.ctx, this.canvasSize)
-
-        setInterval(() => {
+//meter draws en metodo singular
+        this.interval = setInterval(() => {
             this.frames++
             this.clearScreen()
             this.drawBackground()
@@ -58,20 +60,47 @@ const Game = {
             this.drawLiana()
             this.armMoves()
             this.killBees()
+            this.deadLilPanda()
             this.bigPanda.drawBigPanda()
             this.lilPanda.drawLilPanda()
             this.lilPanda.moveLilPanda()
-            // this.lilPandaDead()
             this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.beeName, this.canvasSize)) : null
+           
             this.bees.forEach(elm => {
-
                 elm.drawBee()
                 elm.moveBee()
-
             })
+            this.gameover()
         }, 1000 / 60)
 
     },
+    deadLilPanda() {
+        this.lilPanda.deadState ? this.lives = 0 : null
+
+    },
+
+    gameover() {
+
+        if (this.lives <= 0) {
+
+            clearInterval(this.interval)
+
+            this.ctx.fillStyle = '#F0FFF0'
+            this.ctx.fillRect(230, 200, 800, 200)
+
+            this.ctx.font = "100px Arial"
+            this.ctx.fillStyle = "black"
+            this.ctx.fillText(`GAME OVER`, 300, 330)
+            this.ctx.textBaseLine = 'middle'
+
+
+        }
+
+
+
+    },
+
+
     drawScore() {
         this.ctx.font = "30px Arial"
         this.ctx.fillStyle = "green"
@@ -81,6 +110,7 @@ const Game = {
         this.ctx.fillStyle = "green"
         this.ctx.fillText(`LIVES ${this.lives}`, 1000, 70)
     },
+//ternarias
     randomY() {
         if ((Math.floor(Math.random() * 3) - 1) === 0) {
             return this.beePosY = 350, this.beeName = 'topBee'
@@ -90,9 +120,10 @@ const Game = {
             return this.beePosY = 600, this.beeName = 'bottomBee'
         }
     },
+
     delBee() {
 
-        // console.log(this.lives)
+
         this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 810)
     },
 
@@ -128,7 +159,7 @@ const Game = {
             case this.bigPanda.rightMidPandaImg:
                 document.onkeydown = e => {
 
-                    e.keyCode === 38 ? (this.bigPanda.pandaImg = this.bigPanda.rightUpPandaImg, this.lilPanda.posY = 1) : null
+                    e.keyCode === 38 ? (this.bigPanda.pandaImg = this.bigPanda.rightUpPandaImg, this.lilPanda.posY = 50) : null
                     e.keyCode === 37 ? this.bigPanda.pandaImg = this.bigPanda.leftMidPandaImg : null
                 }
                 break
@@ -144,7 +175,6 @@ const Game = {
 
     killBees() {
 
-//  console.log(this.canvasSize.w-850)
 
         this.bees.forEach(elm => {
 
@@ -169,19 +199,11 @@ const Game = {
 
                 return this.lives -= 1
             }
-            if (elm.beeName === 'bottomBee' && elm.posX ===  600 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg) {
+            if (elm.beeName === 'bottomBee' && elm.posX === 600 && this.bigPanda.pandaImg !== this.bigPanda.leftDownPandaImg) {
 
                 return this.lives -= 1
             }
         })
 
-    //     this.finalScore()
-
-    // },
-    // finalScore() {
-    //     if (Math.floor(this.intScore) % 17) {
-    //        return this.score += 1
-    //     }
     }
-    // // lilPandaDead() {this.lilPanda.lilPandaimg = this.deadlilPandaimg ? this.lives -=2 : null}
 }
