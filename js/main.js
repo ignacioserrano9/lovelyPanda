@@ -71,6 +71,7 @@ const Game = {
                 elm.moveBee()
             })
             this.gameover()
+            this.winGame() 
         }, 1000 / 60)
 
     },
@@ -92,14 +93,32 @@ const Game = {
             this.ctx.fillStyle = "black"
             this.ctx.fillText(`GAME OVER`, 300, 330)
             this.ctx.textBaseLine = 'middle'
-
-
+            this.lives=3
+            this.score=0
         }
 
 
 
     },
+    winGame() {
 
+        if (this.score >= 2000) {
+
+            clearInterval(this.interval)
+
+            this.ctx.fillStyle = '#F0FFF0'
+            this.ctx.fillRect(230, 200, 800, 200)
+
+            this.ctx.font = "100px Arial"
+            this.ctx.fillStyle = "green"
+            this.ctx.fillText(`YOU WON!!!!!`, 310, 330)
+            this.ctx.textBaseLine = 'middle'
+
+            this.lives=3
+            this.score=0
+
+        }
+    },
 
     drawScore() {
         this.ctx.font = "30px Arial"

@@ -1,0 +1,55 @@
+body {
+    padding: 0;
+    text-align: center;
+    font-family: 'H', 'Trebuchet MS', Helvetica;
+    background-color: #F0FFF0;
+}
+
+.howToPlay {
+    float: left;
+    width: 15%;
+
+}
+
+div {
+    display: block
+}
+
+h1 {
+    margin-top: 100px;
+    size: 80px;
+    color: #006400;
+    font-weight: bold;
+    font-style: oblique;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#myCanvas {
+    border: 2px solid black;
+}
+
+img {
+    display: none;
+}
+
+p {
+    display: flex;
+    padding: 10px 0;
+    font-size: 1.3em;
+    color: #228B22;
+    font-weight: bold;
+}
+
+
+body button {
+    margin-top: 80px;
+    font-size: 30px;
+    background-color: #228B22;
+    color: #fff;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
