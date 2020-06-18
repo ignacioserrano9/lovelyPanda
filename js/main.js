@@ -13,6 +13,7 @@ const Game = {
     pandaImg: document.getElementById("imgPanda"),
     backgroundImg: document.getElementById("imgBackground"),
     lianaImg: document.getElementById("imgLiana"),
+    myAudio: document.getElementById('myAudio'),
     bees: [],
     frames: 0,
     beePosY: undefined,
@@ -22,7 +23,7 @@ const Game = {
     score: 0,
     lives: 3,
     interval: undefined,
-
+    
 
 
 
@@ -47,7 +48,7 @@ const Game = {
         this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
     },
     start() {
-        
+        this.audioLoop()
         this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
         this.bigPanda = new BigPanda(this.ctx, this.canvasSize)
        
@@ -100,8 +101,11 @@ const Game = {
             this.ctx.fillStyle = "black"
             this.ctx.fillText(`GAME OVER`, 300, 330)
             this.ctx.textBaseLine = 'middle'
+            
             this.lives = 3
             this.score = 0
+            
+            this.myAudio.pause()
         }
 
 
@@ -109,7 +113,7 @@ const Game = {
     },
     winGame() {
 
-        if (this.score >= 2000) {
+        if (this.score === 2000) {
 
             clearInterval(this.interval)
 
@@ -123,7 +127,7 @@ const Game = {
 
             this.lives = 3
             this.score = 0
-
+            this.myAudio.pause()
         }
     },
 
@@ -212,6 +216,12 @@ const Game = {
 
 
         })
+
+    },
+    audioLoop(){
+        
+       this.myAudio.loop = true
+       this.myAudio.play()
 
     }
 }
