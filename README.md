@@ -15,7 +15,7 @@ To win you must reach 2000 score by stopping bees, but be carefull, you only hav
 
 
 # License
-Game is free of license, al content can be reproduced and tranform.
+Game is free of license, al content can be reproduced and transform.
 
 # Authors
 Ignacio Serrano & Luciana Viña
