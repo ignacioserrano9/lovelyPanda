@@ -12,10 +12,11 @@ const Game = {
     },
     pandaImg: document.getElementById("imgPanda"),
     backgroundImg: document.getElementById("imgBackground"),
-    // scoreFrameImg: document.getElementById("bambuFrame"),
+    scoreFrameImg: document.getElementById("bambuFrame"),
     lianaImg: document.getElementById("imgLiana"),
     audioLoop: document.getElementById('audioLoop'),
     losingAudio: document.getElementById('losingSound'),
+    winningAudio: document.getElementById('winningSound'),
     bees: [],
     frames: 0,
     beePosY: undefined,
@@ -25,7 +26,7 @@ const Game = {
     score: 0,
     lives: 3,
     interval: undefined,
-    
+
 
 
 
@@ -41,9 +42,9 @@ const Game = {
         this.ctx.drawImage(this.backgroundImg, 0, 0, this.canvasSize.w, this.canvasSize.h)
     },
 
-    // drawScoreFrame() {
-    //     this.ctx.drawImage(thiscoreFrameImg, 680, 0, 500, 300)
-    // },
+    drawScoreFrame() {
+        this.ctx.drawImage(this.scoreFrameImg, this.canvasSize.w-870, 0,620 , this.canvasSize.h/9)
+    },
 
 
     setDimensions() {
@@ -58,36 +59,36 @@ const Game = {
     start() {
         this.resetBees()
         this.losingAudio.pause()
-        this.audioBackground()
+        this.playAudioBackground()
         this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
         this.bigPanda = new BigPanda(this.ctx, this.canvasSize)
-       
+
         this.interval = setInterval(() => {
-            
+
             this.clearScreen()
-            this.allDrawing()
+            this.drawAll()
             this.frames++
             this.frames % 100 === 0 ? this.randomY() : null
             this.delBee()
-            this.armMoves()
+            this.movingArms()
             this.killBees()
             this.deadLilPanda()
             this.lilPanda.moveLilPanda()
             this.frames % 100 === 0 ? this.bees.push(new Bee(this.ctx, this.beePosY, this.beeName, this.canvasSize)) : null
-            
+
             this.bees.forEach(elm => {
                 elm.drawBee()
                 elm.moveBee()
             })
-            
+
             this.gameover()
             this.winGame()
         }, 1000 / 60)
 
     },
-    allDrawing() {
+    drawAll() {
         this.drawBackground()
-        // this.drawScoreFrame() 
+        this.drawScoreFrame() 
         this.drawScore()
         this.drawLiana()
         this.bigPanda.drawBigPanda()
@@ -104,21 +105,49 @@ const Game = {
         if (this.lives <= 0) {
 
             clearInterval(this.interval)
+             this.ctx.fillRect(228, 198, 804, 204)
+            this.ctx.fillRect(235, 205, 805, 205)
+            // this.ctx.beginPath();
+            // this.ctx.fillStyle = "	#006400"
+            
+            // // this.ctx.moveTo(20, 10);
+            // // this.ctx.lineTo(80, 10);
+            // // this.ctx.quadraticCurveTo(90, 10, 90, 20);
+            // // this.ctx.lineTo(90, 80);
+            // // this.ctx.quadraticCurveTo(90, 90, 80, 90);
+            // // this.ctx.lineTo(20, 90);
+            // // this.ctx.quadraticCurveTo(10, 90, 10, 80);
+            // // this.ctx.lineTo(10, 20);
+            // // this.ctx.quadraticCurveTo(10, 10, 20, 10);
+            // // this.ctx.stroke();
 
+
+            // this.ctx.moveTo(200, 170);
+            // this.ctx.lineTo(260, 170);
+            // this.ctx.quadraticCurveTo(90, 170, 90, 200);
+            // this.ctx.lineTo(860, 260);
+            // this.ctx.quadraticCurveTo(90, 860, 80, 90);
+            // this.ctx.lineTo(200, 860);
+            // this.ctx.quadraticCurveTo(10, 90, 10, 80);
+            // this.ctx.lineTo(170, 200);
+            // this.ctx.quadraticCurveTo(10, 10, 20, 10);
+            // this.ctx.stroke();
+
+            // this.ctx.fillStyle = "	#006400"
+            // this.ctx.fillRect(200, 170, 860, 260)
             this.ctx.fillStyle = '#F0FFF0'
             this.ctx.fillRect(230, 200, 800, 200)
-
-            this.ctx.font = "100px Arial"
-            this.ctx.fillStyle = "black"
-            this.ctx.fillText(`GAME OVER`, 300, 330)
-            this.ctx.textBaseLine = 'middle'
+          
+            this.drawGameStatus("100px Arial", "black", "GAME OVER", 300, 330, "middle")
             
             this.lives = 3
             this.score = 0
-            
+
             this.audioLoop.pause()
             this.losingAudio.volume = 0.1
             this.losingAudio.play()
+
+
         }
 
 
@@ -130,29 +159,52 @@ const Game = {
 
             clearInterval(this.interval)
 
+            this.ctx.fillStyle = "	#00FF00"
+            this.ctx.fillRect(200, 170, 860, 260)
             this.ctx.fillStyle = '#F0FFF0'
             this.ctx.fillRect(230, 200, 800, 200)
-
-            this.ctx.font = "100px Arial"
-            this.ctx.fillStyle = "green"
-            this.ctx.fillText(`YOU WON!!!!!`, 310, 330)
-            this.ctx.textBaseLine = 'middle'
+             
+            this.drawGameStatus("100px Arial", "green", "YOU WON!!!!!", 310, 330, "middle")
+            
 
             this.lives = 3
             this.score = 0
             this.audioLoop.pause()
+            this.winningAudio.volume = 0.1
+            this.winningAudio.play()
         }
     },
 
-    drawScore() {
-        this.ctx.font = "30px Arial"
-        this.ctx.fillStyle = "green"
-        this.ctx.fillText(`SCORE ${this.score}`, 700, 70)
+        drawGameStatus(font, color, text, textX, textY, position) {
 
-        this.ctx.font = "30px Arial"
-        this.ctx.fillStyle = "green"
-        this.ctx.fillText(`LIVES ${this.lives}`, 1000, 70)
+        this.ctx.font = font
+        this.ctx.fillStyle = color
+        this.ctx.fillText(`${text}`, textX, textY)
+        this.ctx.textBaseLine = position
+      
+
+      },
+
+
+    drawScore() {
+
+        this.drawBoard("35px Arial","#556B2F", "SCORE", this.score,752, 60)
+        
+        this.drawBoard("35px Arial","#556B2F", "LIVES", this.lives, 970, 60)       
+       
+        
     },
+
+    drawBoard(font, color, text, name, textX, textY) {
+
+        this.ctx.font = font
+        this.ctx.fillStyle = color
+        this.ctx.fillText(`${text} ${name} `, textX, textY)  
+        
+      
+
+      },
+
 
     randomY() {
 
@@ -161,22 +213,23 @@ const Game = {
         (Math.floor(Math.random() * 3) - 1) === 2 ? (this.beePosY = 600, this.beeName = 'bottomBee') : null
 
     },
-resetBees(){
-    this.bees = this.bees.filter(bee => bee.posX <= 0)
-},
+    resetBees() {
+        this.bees = this.bees.filter(bee => bee.posX <= 0)
+    },
     delBee() {
 
         this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 810)
     },
 
     drawLiana() {
-        
+
         this.ctx.drawImage(this.lianaImg, this.canvasSize.w - 225, 0, this.canvasSize.w / 14, this.canvasSize.h / 2)
     },
 
-    armMoves() {
+    movingArms() {
 
         switch (this.bigPanda.pandaImg) {
+            
             case this.bigPanda.leftMidPandaImg:
                 document.onkeydown = e => {
                     e.keyCode === 38 ? this.bigPanda.pandaImg = this.bigPanda.leftUpPandaImg : null
@@ -233,11 +286,11 @@ resetBees(){
         })
 
     },
-    audioBackground(){
-        
-       this.audioLoop.loop = true
-       this.audioLoop.volume = 0.1
-       this.audioLoop.play()
+    playAudioBackground() {
+
+        this.audioLoop.loop = true
+        this.audioLoop.volume = 0.1
+        this.audioLoop.play()
 
     }
 }
