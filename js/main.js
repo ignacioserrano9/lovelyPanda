@@ -43,7 +43,7 @@ const Game = {
     },
 
     drawScoreFrame() {
-        this.ctx.drawImage(this.scoreFrameImg, this.canvasSize.w-870, 0,620 , this.canvasSize.h/9)
+        this.ctx.drawImage(this.scoreFrameImg, this.canvasSize.w - 870, 0, 620, this.canvasSize.h / 9)
     },
 
 
@@ -88,7 +88,7 @@ const Game = {
     },
     drawAll() {
         this.drawBackground()
-        this.drawScoreFrame() 
+        this.drawScoreFrame()
         this.drawScore()
         this.drawLiana()
         this.bigPanda.drawBigPanda()
@@ -105,41 +105,13 @@ const Game = {
         if (this.lives <= 0) {
 
             clearInterval(this.interval)
-             this.ctx.fillRect(228, 198, 804, 204)
+            this.ctx.fillRect(228, 198, 804, 204)
             this.ctx.fillRect(235, 205, 805, 205)
-            // this.ctx.beginPath();
-            // this.ctx.fillStyle = "	#006400"
-            
-            // // this.ctx.moveTo(20, 10);
-            // // this.ctx.lineTo(80, 10);
-            // // this.ctx.quadraticCurveTo(90, 10, 90, 20);
-            // // this.ctx.lineTo(90, 80);
-            // // this.ctx.quadraticCurveTo(90, 90, 80, 90);
-            // // this.ctx.lineTo(20, 90);
-            // // this.ctx.quadraticCurveTo(10, 90, 10, 80);
-            // // this.ctx.lineTo(10, 20);
-            // // this.ctx.quadraticCurveTo(10, 10, 20, 10);
-            // // this.ctx.stroke();
-
-
-            // this.ctx.moveTo(200, 170);
-            // this.ctx.lineTo(260, 170);
-            // this.ctx.quadraticCurveTo(90, 170, 90, 200);
-            // this.ctx.lineTo(860, 260);
-            // this.ctx.quadraticCurveTo(90, 860, 80, 90);
-            // this.ctx.lineTo(200, 860);
-            // this.ctx.quadraticCurveTo(10, 90, 10, 80);
-            // this.ctx.lineTo(170, 200);
-            // this.ctx.quadraticCurveTo(10, 10, 20, 10);
-            // this.ctx.stroke();
-
-            // this.ctx.fillStyle = "	#006400"
-            // this.ctx.fillRect(200, 170, 860, 260)
             this.ctx.fillStyle = '#F0FFF0'
             this.ctx.fillRect(230, 200, 800, 200)
-          
+
             this.drawGameStatus("100px Arial", "black", "GAME OVER", 300, 330, "middle")
-            
+
             this.lives = 3
             this.score = 0
 
@@ -158,14 +130,15 @@ const Game = {
         if (this.score === 2000) {
 
             clearInterval(this.interval)
-
+            this.ctx.fillRect(228, 198, 804, 204)
+            this.ctx.fillRect(235, 205, 805, 205)
             this.ctx.fillStyle = "	#00FF00"
             this.ctx.fillRect(200, 170, 860, 260)
             this.ctx.fillStyle = '#F0FFF0'
             this.ctx.fillRect(230, 200, 800, 200)
-             
+
             this.drawGameStatus("100px Arial", "green", "YOU WON!!!!!", 310, 330, "middle")
-            
+
 
             this.lives = 3
             this.score = 0
@@ -175,35 +148,35 @@ const Game = {
         }
     },
 
-        drawGameStatus(font, color, text, textX, textY, position) {
+    drawGameStatus(font, color, text, textX, textY, position) {
 
         this.ctx.font = font
         this.ctx.fillStyle = color
         this.ctx.fillText(`${text}`, textX, textY)
         this.ctx.textBaseLine = position
-      
 
-      },
+
+    },
 
 
     drawScore() {
 
-        this.drawBoard("35px Arial","#556B2F", "SCORE", this.score,752, 60)
-        
-        this.drawBoard("35px Arial","#556B2F", "LIVES", this.lives, 970, 60)       
-       
-        
+        this.drawBoard("35px Arial", "#556B2F", "SCORE", this.score, 752, 60)
+
+        this.drawBoard("35px Arial", "#556B2F", "LIVES", this.lives, 970, 60)
+
+
     },
 
     drawBoard(font, color, text, name, textX, textY) {
 
         this.ctx.font = font
         this.ctx.fillStyle = color
-        this.ctx.fillText(`${text} ${name} `, textX, textY)  
-        
-      
+        this.ctx.fillText(`${text} ${name} `, textX, textY)
 
-      },
+
+
+    },
 
 
     randomY() {
@@ -229,7 +202,7 @@ const Game = {
     movingArms() {
 
         switch (this.bigPanda.pandaImg) {
-            
+
             case this.bigPanda.leftMidPandaImg:
                 document.onkeydown = e => {
                     e.keyCode === 38 ? this.bigPanda.pandaImg = this.bigPanda.leftUpPandaImg : null
