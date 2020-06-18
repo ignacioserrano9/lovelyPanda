@@ -12,8 +12,10 @@ const Game = {
     },
     pandaImg: document.getElementById("imgPanda"),
     backgroundImg: document.getElementById("imgBackground"),
+    // scoreFrameImg: document.getElementById("bambuFrame"),
     lianaImg: document.getElementById("imgLiana"),
-    myAudio: document.getElementById('myAudio'),
+    audioLoop: document.getElementById('audioLoop'),
+    losingAudio: document.getElementById('losingSound'),
     bees: [],
     frames: 0,
     beePosY: undefined,
@@ -38,6 +40,12 @@ const Game = {
     drawBackground() {
         this.ctx.drawImage(this.backgroundImg, 0, 0, this.canvasSize.w, this.canvasSize.h)
     },
+
+    // drawScoreFrame() {
+    //     this.ctx.drawImage(thiscoreFrameImg, 680, 0, 500, 300)
+    // },
+
+
     setDimensions() {
         this.canvasSize.w = window.innerWidth * .8
         this.canvasSize.h = 900
@@ -48,7 +56,9 @@ const Game = {
         this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
     },
     start() {
-        this.audioLoop()
+        this.resetBees()
+        this.losingAudio.pause()
+        this.audioBackground()
         this.lilPanda = new LilPanda(this.ctx, this.canvasSize, this.canvasSize.w - 200)
         this.bigPanda = new BigPanda(this.ctx, this.canvasSize)
        
@@ -77,6 +87,7 @@ const Game = {
     },
     allDrawing() {
         this.drawBackground()
+        // this.drawScoreFrame() 
         this.drawScore()
         this.drawLiana()
         this.bigPanda.drawBigPanda()
@@ -105,7 +116,9 @@ const Game = {
             this.lives = 3
             this.score = 0
             
-            this.myAudio.pause()
+            this.audioLoop.pause()
+            this.losingAudio.volume = 0.1
+            this.losingAudio.play()
         }
 
 
@@ -127,7 +140,7 @@ const Game = {
 
             this.lives = 3
             this.score = 0
-            this.myAudio.pause()
+            this.audioLoop.pause()
         }
     },
 
@@ -148,7 +161,9 @@ const Game = {
         (Math.floor(Math.random() * 3) - 1) === 2 ? (this.beePosY = 600, this.beeName = 'bottomBee') : null
 
     },
-
+resetBees(){
+    this.bees = this.bees.filter(bee => bee.posX <= 0)
+},
     delBee() {
 
         this.bees = this.bees.filter(bee => bee.posX <= this.canvasSize.w - 810)
@@ -218,10 +233,11 @@ const Game = {
         })
 
     },
-    audioLoop(){
+    audioBackground(){
         
-       this.myAudio.loop = true
-       this.myAudio.play()
+       this.audioLoop.loop = true
+       this.audioLoop.volume = 0.1
+       this.audioLoop.play()
 
     }
 }
